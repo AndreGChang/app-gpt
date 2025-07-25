@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
-      - DEFAULT_EMAIL=seu@email.com
+      - DEFAULT_EMAIL=andregchang@gmail.com
     volumes:
       - ./certs:/etc/nginx/certs
       - ./vhost.d:/etc/nginx/vhost.d
@@ -34,7 +34,7 @@ services:
     environment:
       - VIRTUAL_HOST=app-artigo.uk
       - LETSENCRYPT_HOST=app-artigo.uk
-      - LETSENCRYPT_EMAIL=**seu@email.com**
+      - LETSENCRYPT_EMAIL=andregchang@gmail.com
     expose:
       - "80"
     depends_on:
@@ -43,9 +43,9 @@ services:
   backend:
     build: ./backend
     environment:
-      - VIRTUAL_HOST=api.app-artigo.uk
-      - LETSENCRYPT_HOST=api.app-artigo.uk
-      - LETSENCRYPT_EMAIL=**seu@email.com**
+      - VIRTUAL_HOST=app-artigo.uk
+      - LETSENCRYPT_HOST=app-artigo.uk
+      - LETSENCRYPT_EMAIL=andregchang@gmail.com
     expose:
       - "3001"
     depends_on:
