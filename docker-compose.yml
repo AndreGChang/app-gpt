@@ -43,8 +43,8 @@ services:
   backend:
     build: ./backend
     environment:
-      - VIRTUAL_HOST=app-artigo.uk
-      - LETSENCRYPT_HOST=app-artigo.uk
+      - VIRTUAL_HOST=api.app-artigo.uk
+      - LETSENCRYPT_HOST=api.app-artigo.uk
       - LETSENCRYPT_EMAIL=andregchang@gmail.com
     expose:
       - "3001"
