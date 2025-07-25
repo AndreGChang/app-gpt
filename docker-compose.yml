@@ -19,7 +19,8 @@ services:
     container_name: nginx-proxy-le
     restart: unless-stopped
     environment:
-      - DEFAULT_EMAIL=**seu@email.com**
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=seu@email.com
     volumes:
       - ./certs:/etc/nginx/certs
       - ./vhost.d:/etc/nginx/vhost.d
