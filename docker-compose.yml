@@ -1,31 +1,60 @@
+version: '3'
+
 services:
-  mongo-gpt:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  letsencrypt:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-le
+    restart: unless-stopped
+    environment:
+      - DEFAULT_EMAIL=**seu@email.com**
+    volumes:
+      - ./certs:/etc/nginx/certs
+      - ./vhost.d:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+
+  frontend:
+    build: ./frontend
+    environment:
+      - VIRTUAL_HOST=app-artigo.uk
+      - LETSENCRYPT_HOST=app-artigo.uk
+      - LETSENCRYPT_EMAIL=**seu@email.com**
+    expose:
+      - "80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    environment:
+      - VIRTUAL_HOST=api.app-artigo.uk
+      - LETSENCRYPT_HOST=api.app-artigo.uk
+      - LETSENCRYPT_EMAIL=**seu@email.com**
+    expose:
+      - "3001"
+    depends_on:
+      - mongo
+
+  mongo:
     image: mongo:7
     restart: always
-    ports:
-      - 27017:27017
     volumes:
       - mongo_data:/data/db
 
-  backend-gpt:
-    build: ./backend
-    ports:
-      - 3001:3001
-    volumes:
-      - ./backend/uploads:/app/uploads
-    environment:
-      - MONGO_URL=mongodb://mongo-gpt:27017/bookreviews
-      - JWT_SECRET=changeme
-    depends_on:
-      - mongo-gpt
-
-  frontend-gpt:
-    build: ./frontend
-    ports:
-      - 8080:80
-    depends_on:
-      - backend-gpt
-
 volumes:
   mongo_data:
-
