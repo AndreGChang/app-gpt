@@ -1,0 +1,31 @@
+services:
+  mongo-gpt:
+    image: mongo:7
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+
+  backend-gpt:
+    build: ./backend
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend/uploads:/app/uploads
+    environment:
+      - MONGO_URL=mongodb://mongo-gpt:27017/bookreviews
+      - JWT_SECRET=changeme
+    depends_on:
+      - mongo-gpt
+
+  frontend-gpt:
+    build: ./frontend
+    ports:
+      - 8080:80
+    depends_on:
+      - backend-gpt
+
+volumes:
+  mongo_data:
+

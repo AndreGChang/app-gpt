@@ -1,0 +1,140 @@
+body {
+  background: #f9f9fa;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+
+.app-container {
+  max-width: 700px;
+  margin: 40px auto 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 32px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  letter-spacing: -1px;
+  color: #004488;
+  margin: 0;
+}
+
+h2 {
+  margin-top: 0;
+  color: #2255aa;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 24px;
+}
+
+ul li {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  background: #f5f7fa;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+ul li:hover {
+  background: #e2e8f0;
+}
+
+a {
+  text-decoration: none;
+  color: #1a56db;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+a:hover {
+  color: #004488;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+input,
+textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #b8c4d9;
+  font-size: 1rem;
+  background: #f6f9fd;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #357ae8;
+  background: #fff;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: #357ae8;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin-top: 6px;
+}
+
+button:hover {
+  background: #004488;
+}
+
+img {
+  display: block;
+  max-width: 300px;
+  margin: 18px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(34, 85, 170, 0.08);
+}
+
+p {
+  line-height: 1.6;
+  color: #353535;
+}
+
+.error,
+.msg {
+  margin: 0 0 10px 0;
+  padding: 10px;
+  background: #ffe2e6;
+  color: #b71c1c;
+  border-radius: 7px;
+  font-size: 0.97rem;
+  border: 1px solid #ffcdd2;
+}
+
+@media (max-width: 800px) {
+  .app-container {
+    padding: 12px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  img {
+    max-width: 100%;
+  }
+}
