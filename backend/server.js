@@ -12,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = 3001;
-const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/bookreviews";
+const MONGO_URL = process.env.MONGO_URL || "mongodb://mongo:27017/bookreviews";
 const JWT_SECRET = process.env.JWT_SECRET || "changeme";
 
 app.use(cors());
